@@ -10,7 +10,11 @@ class DAC8830 {
     uint8_t DAC8830_CLK_PIN;
     uint8_t DAC8830_MOSI_PIN;
     int16_t DAC8830_REFERENCE_MV;
+#if defined(ESP32) || defined(ESP8266)
     void begin(uint8_t clk_pin, uint8_t mosi_pin, uint8_t cs_pin);
+#else
+    void begin(uint8_t cs_pin);
+#endif
     void writeDAC(uint16_t value);
     void setReference(int16_t value);
     void setMillivolts(uint16_t value);

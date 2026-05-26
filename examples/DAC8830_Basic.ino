@@ -12,7 +12,11 @@ DAC8830 dac;
 void setup()
 {
   delay(100);
+#if defined(ESP32) || defined(ESP8266)
   dac.begin(14, 13, CS_PIN);   //(CLOCK, MOSI, CS)
+#else
+  dac.begin(CS_PIN);           // (CS); HW SPI pins are fixed
+#endif
   dac.setReference(3300);   // This function set the reference voltage for calculate millivolts. Used in setMillivolts funcion !! 
 }
 
